@@ -62,7 +62,19 @@ else:
     if filtered_df.empty:
         st.warning("No data available for the selected filters.")
     else:
-        # Layout: Two columns for key metrics
+        # Key Metrics
+        st.markdown("---")
+        m_col1, m_col2, m_col3 = st.columns(3)
+        avg_val = filtered_df[selected_var].mean()
+        max_val = filtered_df[selected_var].max()
+        min_val = filtered_df[selected_var].min()
+        
+        m_col1.metric(f"Average {selected_var}", f"{avg_val:.2f}")
+        m_col2.metric(f"Maximum {selected_var}", f"{max_val:.2f}")
+        m_col3.metric(f"Minimum {selected_var}", f"{min_val:.2f}")
+        st.markdown("---")
+
+        # Layout: Two columns for key charts
         col1, col2 = st.columns(2)
         
         with col1:
